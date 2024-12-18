@@ -4,16 +4,16 @@ import java.util.List;
 public class User {
     private String name;
     private int id;
-    List<Book> lendBooks;
+    List<Book> lendedBooks;
 
     public User(String name, int id) {
         this.name = name;
         this.id = id;
-        this.lendBooks = new ArrayList<>();
+        this.lendedBooks = new ArrayList<>();
     }
 
-    public List<Book> getLendBooks() {
-        return lendBooks;
+    public List<Book> getLendedBooks() {
+        return lendedBooks;
     }
 
     public String getName() {
@@ -29,14 +29,19 @@ public class User {
     }
 
     public void showDetails(){
+
         System.out.println("ID " + getId() + " - Nome: " + getName());
+        showLendedBooks();
     }
 
     public void addBook(Book book){
-        this.lendBooks.add(book);
+        this.lendedBooks.add(book);
     }
 
-    public void removeBook(Book book){
-        this.lendBooks.remove(book);
+    private void showLendedBooks(){
+        for(Book book: this.getLendedBooks()){
+            book.showDetails();
+            System.out.println(" ");
+        }
     }
 }
