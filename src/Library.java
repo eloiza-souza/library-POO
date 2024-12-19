@@ -86,7 +86,7 @@ public class Library {
 
     private Optional<Book> searchBookByIsbn(String isbn) {
         return this.bookList.stream()
-                .filter(Book::isAvailable)
+                .filter(book -> book.getIsbn().equals(isbn))
                 .findFirst();
     }
 
