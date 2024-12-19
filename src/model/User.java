@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -5,7 +7,7 @@ import java.util.Objects;
 public class User {
     private String name;
     private int id;
-    List<Book> lendedBooks;
+    public List<Book> lendedBooks;
 
     public User(String name, int id) {
         this.name = name;

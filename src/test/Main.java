@@ -1,3 +1,9 @@
+package test;
+
+import model.Book;
+import model.User;
+import service.Library;
+
 public class Main {
     public static void main(String[] args) {
         Book livro1 = new Book("Primeiro livro", "Fulano de Tal", "00001");
