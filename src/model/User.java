@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class User {
+    private static int idGenerator;
     private String name;
     private int id;
     public List<Book> lendedBooks;
 
-    public User(String name, int id) {
+    public User(String name) {
         this.name = name;
-        this.id = id;
+        this.id = ++idGenerator;
         this.lendedBooks = new ArrayList<>();
     }
 
