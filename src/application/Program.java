@@ -23,7 +23,7 @@ public class Program {
     }
 
     public void librarySystem() {
-
+        System.out.println("Bem vindo ao Sistema de Gerenciamento de Biblioteca");
         int option = 0;
         try (Scanner scanner = new Scanner(System.in)) {
 
@@ -48,7 +48,12 @@ public class Program {
                     case USER_REGISTER:
                         userRegister(scanner);
                         break;
-
+                    case LEAD_BOOK:
+                        leadBook(scanner);
+                        break;
+                    case RETURN_BOOK:
+                        returnBook(scanner);
+                        break;
                 }
 
 
@@ -61,7 +66,18 @@ public class Program {
         }
     }
 
+    private void returnBook(Scanner scanner){
+        System.out.println("-> Devolução de livro");
+        library.returnBook(readString(scanner, "ISBN do livro: "), readInt(scanner, "Id do usuário: "));
+    }
+
+    private void leadBook(Scanner scanner) {
+        System.out.println("-> Empréstimo de livro");
+        library.lendBook(readString(scanner, "ISBN do livro: "), readInt(scanner, "Id do usuário: "));
+    }
+
     private void userRegister(Scanner scanner) {
+        System.out.println("-> Cadastro de usuário");
         User user = createUser(scanner);
         library.registerNewUser(user);
     }
@@ -71,6 +87,7 @@ public class Program {
     }
 
     private void bookRegister(Scanner scanner) {
+        System.out.println("-> Cadastro de livro");
         Book book = createBook(scanner);
         library.registerNewBook(book);
     }
@@ -101,7 +118,7 @@ public class Program {
     }
 
     private void showPrincipalMenu() {
-        System.out.println("Bem vindo ao Sistema de Gerenciamento de Biblioteca");
+
         System.out.println("Escolha uma opção:");
         int index = 1;
         for (MenuOptions option : MenuOptions.values()) {
