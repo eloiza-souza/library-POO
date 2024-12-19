@@ -51,6 +51,39 @@ public class Library {
     }
 
 
+    public boolean returnBook(String isbn, int idUser) {
+        Optional<User> userOptional = searchUserById(idUser);
+        if (userOptional.isEmpty()) {
+            showNotReturnBook("Usuário não cadastrado.");
+            return false;
+        }
+        User user = userOptional.get();
+        if (user.lendedBooks.isEmpty()) {
+            showNotReturnBook("Usuário não tem nenhum livro emprestado.");
+            return false;
+        }
+
+        Optional<Book> bookOptional = user.lendedBooks.stream()
+                .filter(book -> book.getIsbn().equals(isbn))
+                .findFirst();
+
+        if (bookOptional.isEmpty()) {
+            showNotReturnBook("Livro não emprestado para o usuário.");
+            return false;
+        }
+
+        Book book = bookOptional.get();
+
+        if (book.isAvailable()) {
+            showNotReturnBook("Livro já foi devolvido antes.");
+            return false;
+        }
+
+        book.returnBook();
+        System.out.println("Livro devolvido.");
+        return true;
+    }
+
     private Optional<Book> searchBookByIsbn(String isbn) {
         return this.bookList.stream()
                 .filter(Book::isAvailable)
