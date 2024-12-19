@@ -17,12 +17,18 @@ public class Library {
            return false;
        }
         this.bookList.add(book);
-        System.out.println("livro cadastrado com sucesso");
+        System.out.println("livro cadastrado com sucesso!");
         return true;
     }
 
-    public void registerNewUser(User user) {
+    public boolean registerNewUser(User user) {
+        if(userList.contains(user)){
+            System.out.println("Usuário já cadastrado");
+            return false;
+        }
         this.userList.add(user);
+        System.out.println("Usuário cadastrado com sucesso!");
+        return true;
     }
 
     public boolean lendBook(String isbn, int idUser) {
@@ -55,7 +61,6 @@ public class Library {
         return true;
     }
 
-
     public boolean returnBook(String isbn, int idUser) {
         Optional<User> userOptional = searchUserById(idUser);
         if (userOptional.isEmpty()) {
@@ -87,6 +92,16 @@ public class Library {
         book.returnBook();
         System.out.println("Livro devolvido.");
         return true;
+    }
+
+    public void showAvailableBooks(){
+        System.out.println("----- Livros disponíveis para empréstimo -----");
+        for(Book book: bookList){
+            if(book.isAvailable()){
+                book.showDetails();
+                System.out.println(" ");
+            }
+        }
     }
 
     private Optional<Book> searchBookByIsbn(String isbn) {
