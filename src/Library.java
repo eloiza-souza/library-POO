@@ -20,31 +20,35 @@ public class Library {
         this.userList.add(user);
     }
 
-    public void lendBook(String isbn, int idUser) {
-        Optional<Book> book = searchBookByIsbn(isbn);
-        if (book.isEmpty()) {
+    public boolean lendBook(String isbn, int idUser) {
+        Optional<Book> bookOptional = searchBookByIsbn(isbn);
+        if (bookOptional.isEmpty()) {
             showNotLendBook("Livro não cadastrado");
-            return;
+            return false;
         }
-        if (!book.get().isAvailable()) {
+        Book book = bookOptional.get();
+
+        if (!book.isAvailable()) {
             showNotLendBook("livro indisponível");
-            return;
+            return false;
         }
-        Optional<User> user = searchUserById(idUser);
-        if (user.isEmpty()) {
+        Optional<User> userOptional = searchUserById(idUser);
+        if (userOptional.isEmpty()) {
             showNotLendBook("Usuário não cadastrado.");
-            return;
+            return false;
         }
-        if (!isUserAvailable(user.get())) {
+        User user = userOptional.get();
+
+        if (!isUserAvailable(user)) {
             showNotLendBook("Usuário com número máximo de livros permitido." +
                     "\nDevolva um livro para realizar novo empréstimo");
-            return;
+            return false;
         }
-        book.get().lend();
-        user.get().addBook(book.get());
+        book.lend();
+        user.addBook(book);
         System.out.println("Empréstimo realizado com sucesso!");
+        return true;
     }
-
 
 
     private Optional<Book> searchBookByIsbn(String isbn) {
