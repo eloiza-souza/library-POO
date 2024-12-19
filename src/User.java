@@ -12,10 +12,6 @@ public class User {
         this.lendedBooks = new ArrayList<>();
     }
 
-    public List<Book> getLendedBooks() {
-        return lendedBooks;
-    }
-
     public String getName() {
         return name;
     }
@@ -31,15 +27,16 @@ public class User {
     public void showDetails(){
 
         System.out.println("ID " + getId() + " - Nome: " + getName());
-        showLendedBooks();
+        this.showLendedBooks();
     }
 
     public void addBook(Book book){
         this.lendedBooks.add(book);
     }
 
+
     private void showLendedBooks(){
-        for(Book book: this.getLendedBooks()){
+        for(Book book: this.lendedBooks){
             book.showDetails();
             System.out.println(" ");
         }
