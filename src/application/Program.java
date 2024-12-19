@@ -1,12 +1,21 @@
 package application;
 
 import enums.MenuOptions;
+import model.Book;
+import model.User;
 import service.Library;
 
 import java.util.Scanner;
 
+import static enums.MenuOptions.BOOK_REGISTER;
+
 public class Program {
+    private Library library;
     final int END = MenuOptions.values().length + 1;
+
+    public Program() {
+        this.library = new Library();
+    }
 
     public static void main(String[] args) {
         Program program = new Program();
@@ -19,7 +28,22 @@ public class Program {
         try (Scanner scanner = new Scanner(System.in)) {
             do {
                 showPrincipalMenu();
-                option = readUserOption(scanner, "Opção: ", 1,END);
+                option = readUserOption(scanner, "Opção: ", 1, END);
+
+                if (option == END){
+                    continue;
+                }
+
+                MenuOptions menuOption = MenuOptions.values()[option-1];
+
+                switch (menuOption) {
+                    case BOOK_REGISTER:
+                        bookRegister(scanner);
+                        break;
+
+                }
+
+
             } while (option != END);
 
             System.out.println("----Programa encerrado----");
@@ -27,6 +51,22 @@ public class Program {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+
+    private void bookRegister(Scanner scanner) {
+        Book book = createBook(scanner);
+        library.registerNewBook(book);
+    }
+
+    private Book createBook(Scanner scanner) {
+        return new Book(readString(scanner, "Título: "), readString(scanner, "Autor: "),
+                readString(scanner, "ISBN: "));
+    }
+
+    private String readString(Scanner scanner, String message) {
+        System.out.print(message);
+        return scanner.nextLine();
     }
 
     private int readUserOption(Scanner scanner, String message, int min, int max) {
