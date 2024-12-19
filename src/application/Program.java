@@ -26,15 +26,20 @@ public class Program {
 
         int option = 0;
         try (Scanner scanner = new Scanner(System.in)) {
+
             do {
                 showPrincipalMenu();
-                option = readUserOption(scanner, "Opção: ", 1, END);
+                option = readInt(scanner, "Opção: ");
 
-                if (option == END){
+                if (option == END) {
+                    continue;
+                }
+                if (option < 0 || option > END) {
+                    System.out.println("Opção fora do intervalo. Tente novamente.");
                     continue;
                 }
 
-                MenuOptions menuOption = MenuOptions.values()[option-1];
+                MenuOptions menuOption = MenuOptions.values()[option - 1];
 
                 switch (menuOption) {
                     case BOOK_REGISTER:
@@ -42,6 +47,8 @@ public class Program {
                         break;
                     case USER_REGISTER:
                         userRegister(scanner);
+                        break;
+
                 }
 
 
@@ -59,7 +66,7 @@ public class Program {
         library.registerNewUser(user);
     }
 
-    private User createUser(Scanner scanner){
+    private User createUser(Scanner scanner) {
         return new User(readString(scanner, "Nome: "));
     }
 
@@ -78,18 +85,14 @@ public class Program {
         return scanner.nextLine();
     }
 
-    private int readUserOption(Scanner scanner, String message, int min, int max) {
+    private int readInt(Scanner scanner, String message) {
         int option;
         while (true) {
             System.out.print(message);
             if (scanner.hasNextInt()) {
                 option = scanner.nextInt();
                 scanner.nextLine();
-
-                if (option >= min && option <= max)
-                    return option;
-                else
-                    System.out.println("Opção fora do intervalo. Tente novamente.");
+                return option;
             } else {
                 System.out.println("Entrada inválida. Por favor, insira um número.");
                 scanner.nextLine();
