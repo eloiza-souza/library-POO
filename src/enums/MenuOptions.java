@@ -5,7 +5,7 @@ public enum MenuOptions {
     USER_REGISTER("Cadastrar usuário"),
     LEAD_BOOK ("Realizar empréstimo"),
     RETURN_BOOK ("Realizar devolução"),
-    LIBRARY_BOOKS("Exibir todos os livros da biblioteca"),
+    LIBRARY_BOOKS("Listar livros da biblioteca"),
     AVAILABLE_BOOKS("Listar livros disponíveis"),
     BOOKS_USER ("Listar livros por usuário");
 
