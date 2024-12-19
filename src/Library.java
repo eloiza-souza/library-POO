@@ -1,19 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class Library {
-    private List<Book> bookList;
-    private List<User> userList;
+    private final List<Book> bookList;
+    private final List<User> userList;
 
     public Library() {
         this.bookList = new ArrayList<>();
         this.userList = new ArrayList<>();
     }
 
-    public void registerNewBook(Book book) {
+    public boolean registerNewBook(Book book) {
+       if(bookList.contains(book)){
+           System.out.println("livro já cadastrado");
+           return false;
+       }
         this.bookList.add(book);
+        System.out.println("livro cadastrado com sucesso");
+        return true;
     }
 
     public void registerNewUser(User user) {
