@@ -13,7 +13,7 @@ public class Main {
         Book livro4 = new Book("Outro livro novo", "Desconhecido", "00003");
 
         Book livro5 = new Book("Livro novo", "Autor nome", "00004");
-        User user1 = new User("Jose", 1);
+        User user1 = new User("Jose");
 
         Library library = new Library();
         library.registerNewBook(livro1);

@@ -40,7 +40,8 @@ public class Program {
                     case BOOK_REGISTER:
                         bookRegister(scanner);
                         break;
-
+                    case USER_REGISTER:
+                        userRegister(scanner);
                 }
 
 
@@ -53,6 +54,14 @@ public class Program {
         }
     }
 
+    private void userRegister(Scanner scanner) {
+        User user = createUser(scanner);
+        library.registerNewUser(user);
+    }
+
+    private User createUser(Scanner scanner){
+        return new User(readString(scanner, "Nome: "));
+    }
 
     private void bookRegister(Scanner scanner) {
         Book book = createBook(scanner);
