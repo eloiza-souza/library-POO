@@ -31,6 +31,13 @@ public class Book {
         this.author = author;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -43,13 +50,7 @@ public class Book {
         return Objects.hashCode(getIsbn());
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
 
     public void showDetails(){
         System.out.println("Título: " + getTitle());

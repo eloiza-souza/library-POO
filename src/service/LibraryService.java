@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Library {
+public class LibraryService {
     private final List<Book> bookList;
     private final List<User> userList;
 
-    public Library() {
+    public LibraryService() {
         this.bookList = new ArrayList<>();
         this.userList = new ArrayList<>();
     }
@@ -45,7 +45,7 @@ public class Library {
         Book book = bookOptional.get();
 
         if (!book.isAvailable()) {
-            showNotLendBook("livro indisponível");
+            showNotLendBook("Livro indisponível");
             return false;
         }
         Optional<User> userOptional = searchUserById(idUser);

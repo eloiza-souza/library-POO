@@ -2,9 +2,9 @@ package test;
 
 import model.Book;
 import model.User;
-import service.Library;
+import service.LibraryService;
 
-public class Main {
+public class TestLibraryService {
     public static void main(String[] args) {
         Book livro1 = new Book("Primeiro livro", "Fulano de Tal", "00001");
 
@@ -15,7 +15,7 @@ public class Main {
         Book livro5 = new Book("Livro novo", "Autor nome", "00004");
         User user1 = new User("Jose");
 
-        Library library = new Library();
+        LibraryService library = new LibraryService();
         library.registerNewBook(livro1);
         library.registerNewBook(livro2);
         library.registerNewBook(livro3);

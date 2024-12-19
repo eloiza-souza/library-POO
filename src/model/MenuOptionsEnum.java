@@ -1,6 +1,6 @@
-package enums;
+package model;
 
-public enum MenuOptions {
+public enum MenuOptionsEnum {
     BOOK_REGISTER("Cadastrar livro"),
     USER_REGISTER("Cadastrar usuário"),
     LEAD_BOOK("Realizar empréstimo"),
@@ -12,7 +12,7 @@ public enum MenuOptions {
 
     private final String description;
 
-    MenuOptions(String description) {
+    MenuOptionsEnum(String description) {
         this.description = description;
     }
 

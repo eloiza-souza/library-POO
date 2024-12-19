@@ -1,26 +1,20 @@
-package application;
+package controller;
 
-import enums.MenuOptions;
+import model.MenuOptionsEnum;
 import model.Book;
 import model.User;
-import service.Library;
+import service.LibraryService;
 
 import java.util.Scanner;
 
-import static enums.MenuOptions.BOOK_REGISTER;
+public class LibraryController {
+    private LibraryService library;
+    final int END = MenuOptionsEnum.values().length + 1;
 
-public class Program {
-    private Library library;
-    final int END = MenuOptions.values().length + 1;
-
-    public Program() {
-        this.library = new Library();
+    public LibraryController() {
+        this.library = new LibraryService();
     }
 
-    public static void main(String[] args) {
-        Program program = new Program();
-        program.librarySystem();
-    }
 
     public void librarySystem() {
         System.out.println("Bem vindo ao Sistema de Gerenciamento de Biblioteca");
@@ -39,7 +33,7 @@ public class Program {
                     continue;
                 }
 
-                MenuOptions menuOption = MenuOptions.values()[option - 1];
+                MenuOptionsEnum menuOption = MenuOptionsEnum.values()[option - 1];
 
                 switch (menuOption) {
                     case BOOK_REGISTER:
@@ -121,7 +115,7 @@ public class Program {
 
         System.out.println("Escolha uma opção:");
         int index = 1;
-        for (MenuOptions option : MenuOptions.values()) {
+        for (MenuOptionsEnum option : MenuOptionsEnum.values()) {
             System.out.println(index++ + ". " + option.getDescription());
         }
         System.out.println(END + ". Sair");
