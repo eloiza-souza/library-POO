@@ -54,6 +54,9 @@ public class LibraryController {
                     case AVAILABLE_BOOKS:
                         library.showAvailableBooks();
                         break;
+                    case BOOKS_USER:
+                        showBooksUser(scanner);
+                        break;
                 }
 
 
@@ -66,7 +69,9 @@ public class LibraryController {
         }
     }
 
-
+    private void showBooksUser(Scanner scanner) {
+        library.showUserListBook(readInt(scanner, "Id do usuário: "));
+    }
 
     private void returnBook(Scanner scanner){
         System.out.println("-> Devolução de livro");

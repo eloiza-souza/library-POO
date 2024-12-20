@@ -117,6 +117,15 @@ public class LibraryService {
         }
     }
 
+    public void showUserListBook(int userId) {
+        Optional<User> userOptional = searchUserById(userId);
+        if (userOptional.isEmpty()) {
+            System.out.println("Usuário não cadastrado.");
+            return;
+        }
+        System.out.println("----- Livros já emprestados para o usuário -----");
+        userOptional.get().showDetails();
+    }
 
     private Optional<Book> searchBookByIsbn(String isbn) {
         return this.bookList.stream()
