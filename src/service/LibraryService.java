@@ -21,6 +21,14 @@ public class LibraryService {
         this.userList = userList;
     }
 
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
     public boolean registerNewBook(Book book) {
         if (bookList.contains(book)) {
             System.out.println("Livro já cadastrado");
