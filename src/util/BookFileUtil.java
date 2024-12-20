@@ -8,7 +8,7 @@ import java.util.List;
 import static util.FileUtil.SEPARATOR;
 
 public class BookFileUtil {
-    final static String FILE_NAME = "books";
+    final static String FILE_NAME = "booksFile";
 
     public static void saveBooksToFile(List<Book> booksList) {
         FileUtil.saveStringObjectsToFile(convertListBooksToListStrings(booksList), FILE_NAME);

@@ -9,7 +9,7 @@ import java.util.List;
 import static util.FileUtil.SEPARATOR;
 
 public class UserFileUtil {
-    final static  String FILE_NAME = "Users";
+    final static  String FILE_NAME = "usersFile";
     final static String SEPARATOR_BOOKS = "&";
     final static String SEPARATOR_BOOK_ATRIBUTES = "/";
 
