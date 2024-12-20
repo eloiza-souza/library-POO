@@ -17,7 +17,7 @@ public class LibraryController {
 
 
     public void librarySystem() {
-        System.out.println("Bem vindo ao Sistema de Gerenciamento de Biblioteca");
+        System.out.println("\n*** Bem vindo ao Sistema de Gerenciamento de Biblioteca ***\n");
         int option = 0;
         try (Scanner scanner = new Scanner(System.in)) {
 
@@ -57,12 +57,17 @@ public class LibraryController {
                     case BOOKS_USER:
                         showBooksUser(scanner);
                         break;
+                    case LIBRARY_USERS:
+                        library.showUsers();
+                        break;
+                    default:
+                        break;
                 }
 
 
             } while (option != END);
 
-            System.out.println("----Programa encerrado----");
+            System.out.println("\n----Programa encerrado----");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -74,17 +79,17 @@ public class LibraryController {
     }
 
     private void returnBook(Scanner scanner){
-        System.out.println("-> Devolução de livro");
+        System.out.println("\n-> Devolução de livro");
         library.returnBook(readString(scanner, "ISBN do livro: "), readInt(scanner, "Id do usuário: "));
     }
 
     private void leadBook(Scanner scanner) {
-        System.out.println("-> Empréstimo de livro");
+        System.out.println("\n-> Empréstimo de livro");
         library.lendBook(readString(scanner, "ISBN do livro: "), readInt(scanner, "Id do usuário: "));
     }
 
     private void userRegister(Scanner scanner) {
-        System.out.println("-> Cadastro de usuário");
+        System.out.println("\n-> Cadastro de usuário");
         User user = createUser(scanner);
         library.registerNewUser(user);
     }
@@ -94,7 +99,7 @@ public class LibraryController {
     }
 
     private void bookRegister(Scanner scanner) {
-        System.out.println("-> Cadastro de livro");
+        System.out.println("\n-> Cadastro de livro");
         Book book = createBook(scanner);
         library.registerNewBook(book);
     }
@@ -126,7 +131,7 @@ public class LibraryController {
 
     private void showPrincipalMenu() {
 
-        System.out.println("Escolha uma opção:");
+        System.out.println("\nEscolha uma opção:");
         int index = 1;
         for (MenuOptionsEnum option : MenuOptionsEnum.values()) {
             System.out.println(index++ + ". " + option.getDescription());

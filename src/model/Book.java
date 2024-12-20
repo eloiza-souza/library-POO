@@ -50,8 +50,6 @@ public class Book {
         return Objects.hashCode(getIsbn());
     }
 
-
-
     public void showDetails(){
         System.out.println("Título: " + getTitle());
         System.out.println("Autor: " + getAuthor());

@@ -28,13 +28,16 @@ public class User {
         this.name = name;
     }
 
-    public void showDetails(){
-
-        System.out.println("ID " + getId() + " - Nome: " + getName());
+    public void showDetails() {
+        this.showUser();
         this.showLendedBooks();
     }
 
-    public void addBook(Book book){
+    public void showUser() {
+        System.out.println("ID " + getId() + " - Nome: " + getName());
+    }
+
+    public void addBook(Book book) {
         this.lendedBooks.add(book);
     }
 
@@ -50,8 +53,8 @@ public class User {
         return Objects.hashCode(getId());
     }
 
-    private void showLendedBooks(){
-        for(Book book: this.lendedBooks){
+    private void showLendedBooks() {
+        for (Book book : this.lendedBooks) {
             book.showDetails();
             System.out.println(" ");
         }

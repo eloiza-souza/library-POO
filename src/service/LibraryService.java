@@ -18,11 +18,11 @@ public class LibraryService {
 
     public boolean registerNewBook(Book book) {
         if (bookList.contains(book)) {
-            System.out.println("livro já cadastrado");
+            System.out.println("Livro já cadastrado");
             return false;
         }
         this.bookList.add(book);
-        System.out.println("livro cadastrado com sucesso!");
+        System.out.println("Livro cadastrado com sucesso!");
         return true;
     }
 
@@ -110,7 +110,7 @@ public class LibraryService {
     }
 
     public void showLibraryBooks() {
-        System.out.println("----- Acervo da Biblioteca -----");
+        System.out.println("\n----- Acervo da Biblioteca -----\n");
         for (Book book : bookList) {
             book.showDetails();
             System.out.println(" ");
@@ -123,8 +123,14 @@ public class LibraryService {
             System.out.println("Usuário não cadastrado.");
             return;
         }
-        System.out.println("----- Livros já emprestados para o usuário -----");
+        System.out.println("\n----- Livros já emprestados para o usuário -----\n");
         userOptional.get().showDetails();
+    }
+
+    public void showUsers(){
+        System.out.println("\n----- Usuários da Biblioteca -----\n");
+        for (User user : userList)
+            user.showUser();
     }
 
     private Optional<Book> searchBookByIsbn(String isbn) {
