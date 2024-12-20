@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtil {
-    private final static String SEPARATOR = ";";
+    public final static String SEPARATOR = ";";
 
     public static void saveStringObjectsToFile(List<String> objectsList, String fileName) {
 
