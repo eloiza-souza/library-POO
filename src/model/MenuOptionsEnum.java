@@ -19,5 +19,4 @@ public enum MenuOptionsEnum {
     public String getDescription() {
         return description;
     }
-
 }

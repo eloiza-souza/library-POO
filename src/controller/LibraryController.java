@@ -48,6 +48,12 @@ public class LibraryController {
                     case RETURN_BOOK:
                         returnBook(scanner);
                         break;
+                    case LIBRARY_BOOKS:
+                        library.showLibraryBooks();
+                        break;
+                    case AVAILABLE_BOOKS:
+                        library.showAvailableBooks();
+                        break;
                 }
 
 
@@ -59,6 +65,8 @@ public class LibraryController {
             System.out.println(e.getMessage());
         }
     }
+
+
 
     private void returnBook(Scanner scanner){
         System.out.println("-> Devolução de livro");
