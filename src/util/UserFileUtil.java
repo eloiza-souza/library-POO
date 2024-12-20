@@ -17,7 +17,7 @@ public class UserFileUtil {
         FileUtil.saveStringObjectsToFile(convertListUsersToListStrings(UsersList),FILE_NAME);
     }
 
-    public static List<User> loadUsersFromFile(String fileName) {
+    public static List<User> loadUsersFromFile() {
         return convertListStringsToListUsers( FileUtil.loadStringObjectsFromFile(FILE_NAME));
     }
 

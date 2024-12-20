@@ -14,7 +14,7 @@ public class BookFileUtil {
         FileUtil.saveStringObjectsToFile(convertListBooksToListStrings(booksList), FILE_NAME);
     }
 
-    public static List<Book> loadBooksFromFile(String fileName) {
+    public static List<Book> loadBooksFromFile() {
         return convertListStringsToListBooks(FileUtil.loadStringObjectsFromFile(FILE_NAME));
     }
 

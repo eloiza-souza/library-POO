@@ -4,7 +4,10 @@ import model.MenuOptionsEnum;
 import model.Book;
 import model.User;
 import service.LibraryService;
+import util.BookFileUtil;
+import util.UserFileUtil;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class LibraryController {
@@ -12,9 +15,8 @@ public class LibraryController {
     final int END = MenuOptionsEnum.values().length + 1;
 
     public LibraryController() {
-        this.library = new LibraryService();
+        this.library = new LibraryService(BookFileUtil.loadBooksFromFile(), UserFileUtil.loadUsersFromFile());
     }
-
 
     public void librarySystem() {
         System.out.println("\n*** Bem vindo ao Sistema de Gerenciamento de Biblioteca ***\n");
@@ -67,6 +69,8 @@ public class LibraryController {
 
             } while (option != END);
 
+            BookFileUtil.saveBooksToFile(library.getBookList());
+            UserFileUtil.saveUsersToFile(library.getUserList());
             System.out.println("\n----Programa encerrado----");
 
         } catch (Exception e) {
