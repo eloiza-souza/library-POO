@@ -1,13 +1,13 @@
 package controller;
 
-import model.MenuOptionsEnum;
 import model.Book;
+import model.MenuOptionsEnum;
 import model.User;
 import service.LibraryService;
 import util.BookFileUtil;
+import util.ScannerUtil;
 import util.UserFileUtil;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class LibraryController {
@@ -25,7 +25,7 @@ public class LibraryController {
 
             do {
                 showPrincipalMenu();
-                option = readInt(scanner, "Opção: ");
+                option = ScannerUtil.readInt(scanner, "Opção: ");
 
                 if (option == END) {
                     continue;
@@ -39,16 +39,16 @@ public class LibraryController {
 
                 switch (menuOption) {
                     case BOOK_REGISTER:
-                        bookRegister(scanner);
+                        bookRegisterController(scanner);
                         break;
                     case USER_REGISTER:
-                        userRegister(scanner);
+                        userRegisterController(scanner);
                         break;
                     case LEAD_BOOK:
-                        leadBook(scanner);
+                        lendBookController(scanner);
                         break;
                     case RETURN_BOOK:
-                        returnBook(scanner);
+                        returnBookController(scanner);
                         break;
                     case LIBRARY_BOOKS:
                         library.showLibraryBooks();
@@ -57,7 +57,7 @@ public class LibraryController {
                         library.showAvailableBooks();
                         break;
                     case BOOKS_USER:
-                        showBooksUser(scanner);
+                        showBooksUserController(scanner);
                         break;
                     case LIBRARY_USERS:
                         library.showUsers();
@@ -65,8 +65,6 @@ public class LibraryController {
                     default:
                         break;
                 }
-
-
             } while (option != END);
 
             BookFileUtil.saveBooksToFile(library.getBookList());
@@ -78,63 +76,46 @@ public class LibraryController {
         }
     }
 
-    private void showBooksUser(Scanner scanner) {
-        library.showUserListBook(readInt(scanner, "Id do usuário: "));
+    private void showBooksUserController(Scanner scanner) {
+        library.showUserListBook(ScannerUtil.readInt(scanner, "Id do usuário: "));
     }
 
-    private void returnBook(Scanner scanner){
+    private void returnBookController(Scanner scanner){
         System.out.println("\n-> Devolução de livro");
-        library.returnBook(readString(scanner, "ISBN do livro: "), readInt(scanner, "Id do usuário: "));
+        library.returnBook(ScannerUtil.readString(scanner, "ISBN do livro: "),
+                ScannerUtil.readInt(scanner, "Id do usuário: "));
     }
 
-    private void leadBook(Scanner scanner) {
+    private void lendBookController(Scanner scanner) {
         System.out.println("\n-> Empréstimo de livro");
-        library.lendBook(readString(scanner, "ISBN do livro: "), readInt(scanner, "Id do usuário: "));
+        library.lendBook(ScannerUtil.readString(scanner, "ISBN do livro: "),
+                ScannerUtil.readInt(scanner, "Id do usuário: "));
     }
 
-    private void userRegister(Scanner scanner) {
+    private void userRegisterController(Scanner scanner) {
         System.out.println("\n-> Cadastro de usuário");
         User user = createUser(scanner);
         library.registerNewUser(user);
     }
 
     private User createUser(Scanner scanner) {
-        return new User(readString(scanner, "Nome: "));
+        return new User(ScannerUtil.readString(scanner, "Nome: "));
     }
 
-    private void bookRegister(Scanner scanner) {
+    private void bookRegisterController(Scanner scanner) {
         System.out.println("\n-> Cadastro de livro");
         Book book = createBook(scanner);
         library.registerNewBook(book);
     }
 
     private Book createBook(Scanner scanner) {
-        return new Book(readString(scanner, "Título: "), readString(scanner, "Autor: "),
-                readString(scanner, "ISBN: "));
+        return new Book(ScannerUtil.readString(scanner, "Título: "),
+                ScannerUtil.readString(scanner, "Autor: "),
+                ScannerUtil.readString(scanner, "ISBN: "));
     }
 
-    private String readString(Scanner scanner, String message) {
-        System.out.print(message);
-        return scanner.nextLine();
-    }
-
-    private int readInt(Scanner scanner, String message) {
-        int option;
-        while (true) {
-            System.out.print(message);
-            if (scanner.hasNextInt()) {
-                option = scanner.nextInt();
-                scanner.nextLine();
-                return option;
-            } else {
-                System.out.println("Entrada inválida. Por favor, insira um número.");
-                scanner.nextLine();
-            }
-        }
-    }
 
     private void showPrincipalMenu() {
-
         System.out.println("\nEscolha uma opção:");
         int index = 1;
         for (MenuOptionsEnum option : MenuOptionsEnum.values()) {
@@ -142,7 +123,5 @@ public class LibraryController {
         }
         System.out.println(END + ". Sair");
     }
-
-
 }
 
