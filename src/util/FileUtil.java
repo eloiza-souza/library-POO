@@ -1,8 +1,5 @@
 package util;
 
-import model.Book;
-import model.User;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
