@@ -12,10 +12,21 @@ import java.util.Scanner;
 
 public class LibraryController {
     private LibraryService library;
+
+    private BookFileUtil bookFileUtil;
+    private UserFileUtil userFileUtil;
+
     final int END = MenuOptionsEnum.values().length + 1;
+    final static String FILE_NAME_BOOK = "booksFile";
+    final static  String FILE_NAME_USER = "usersFile";
+
 
     public LibraryController() {
-        this.library = new LibraryService(BookFileUtil.loadBooksFromFile(), UserFileUtil.loadUsersFromFile());
+        this.userFileUtil = new UserFileUtil();
+        this.bookFileUtil = new BookFileUtil();
+
+        this.library = new LibraryService(bookFileUtil.loadFromFile(FILE_NAME_BOOK),
+                                          userFileUtil.loadFromFile(FILE_NAME_USER));
     }
 
     public void librarySystem() {
@@ -67,8 +78,8 @@ public class LibraryController {
                 }
             } while (option != END);
 
-            BookFileUtil.saveBooksToFile(library.getBookList());
-            UserFileUtil.saveUsersToFile(library.getUserList());
+            bookFileUtil.saveToFile(library.getBookList(),FILE_NAME_BOOK);
+            userFileUtil.saveToFile(library.getUserList(),FILE_NAME_USER);
             System.out.println("\n----Programa encerrado----");
 
         } catch (Exception e) {

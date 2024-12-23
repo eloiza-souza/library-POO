@@ -7,29 +7,22 @@ import java.util.List;
 
 import static util.FileUtil.SEPARATOR;
 
-public class BookFileUtil {
-    final static String FILE_NAME = "booksFile";
+public class BookFileUtil implements FileUtil<Book> {
 
-    public static void saveBooksToFile(List<Book> booksList) {
-        FileUtil.saveStringObjectsToFile(convertListBooksToListStrings(booksList), FILE_NAME);
-    }
-
-    public static List<Book> loadBooksFromFile() {
-        return convertListStringsToListBooks(FileUtil.loadStringObjectsFromFile(FILE_NAME));
-    }
-
-    private static List<String> convertListBooksToListStrings(List<Book> booksList) {
+    @Override
+    public List<String> convertToListStrings(List<Book> list) {
         List<String> listString = new ArrayList<>();
-        for (Book book : booksList) {
+        for (Book book : list) {
             listString.add(book.getTitle() + SEPARATOR +
-                           book.getAuthor() + SEPARATOR +
-                           book.getIsbn() + SEPARATOR +
-                           book.isAvailable());
+                    book.getAuthor() + SEPARATOR +
+                    book.getIsbn() + SEPARATOR +
+                    book.isAvailable());
         }
         return listString;
     }
 
-    private static List<Book> convertListStringsToListBooks(List<String> stringsList) {
+    @Override
+    public List<Book> convertToListT(List<String> stringsList) {
         List<Book> listBooks = new ArrayList<>();
         for (String string : stringsList) {
             String[] stringSplit = string.split(SEPARATOR);
@@ -43,5 +36,4 @@ public class BookFileUtil {
         }
         return listBooks;
     }
-
 }

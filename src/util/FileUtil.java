@@ -1,13 +1,27 @@
 package util;
 
+import model.Book;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileUtil {
-    public final static String SEPARATOR = ";";
+public interface FileUtil<T> {
+    String SEPARATOR = ";";
 
-    public static void saveStringObjectsToFile(List<String> objectsList, String fileName) {
+    List<String> convertToListStrings(List<T> list);
+
+    List<T> convertToListT(List<String> stringsList);
+
+    default void saveToFile(List<T> list, String fileName){
+        saveStringObjectsToFile(convertToListStrings(list), fileName);
+    }
+
+    default List<T> loadFromFile(String fileName){
+        return convertToListT(loadStringObjectsFromFile(fileName));
+    }
+
+    private static void saveStringObjectsToFile(List<String> objectsList, String fileName) {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (String objectString : objectsList) {
@@ -20,7 +34,7 @@ public class FileUtil {
         }
     }
 
-    public static List<String> loadStringObjectsFromFile(String fileName) {
+    private static List<String> loadStringObjectsFromFile(String fileName) {
         List<String> objectsList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
